@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from "@nestjs/common";
 
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Real Estate CRM API is running! 🏠';
+    return "Real Estate CRM API is running! 🏠";
   }
 }

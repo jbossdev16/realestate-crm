@@ -16,11 +16,15 @@
     "db:seed": "npx tsx prisma/seeds/dev.seed.ts"
   },
   "dependencies": {
-    "@prisma/client": "^5.0.0"
+    "@prisma/client": "^6.15.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "prisma": "^5.0.0",
+    "i": "^0.3.7",
+    "npm": "^11.6.0",
+    "prisma": "^6.15.0",
     "tsx": "^4.0.0",
     "typescript": "^5.0.0"
   }

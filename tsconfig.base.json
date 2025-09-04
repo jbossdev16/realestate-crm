@@ -15,13 +15,20 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@crm/db/*": ["packages/db/src/*"],
-      "@crm/ai/*": ["packages/ai/src/*"],
-      "@crm/types/*": ["packages/types/src/*"],
-      "@crm/ui/*": ["packages/ui/src/*"],
-      "@crm/config/*": ["packages/config/src/*"],
-      "@crm/utils/*": ["packages/utils/src/*"],
-      "@crm/telemetry/*": ["packages/telemetry/src/*"]
+      "@realestate-crm/db": ["packages/db/src"],
+      "@realestate-crm/db/*": ["packages/db/src/*"],
+      "@realestate-crm/ai": ["packages/ai/src"],
+      "@realestate-crm/ai/*": ["packages/ai/src/*"],
+      "@realestate-crm/types": ["packages/types/src"],
+      "@realestate-crm/types/*": ["packages/types/src/*"],
+      "@realestate-crm/ui": ["packages/ui/src"],
+      "@realestate-crm/ui/*": ["packages/ui/src/*"],
+      "@realestate-crm/config": ["packages/config/src"],
+      "@realestate-crm/config/*": ["packages/config/src/*"],
+      "@realestate-crm/utils": ["packages/utils/src"],
+      "@realestate-crm/utils/*": ["packages/utils/src/*"],
+      "@realestate-crm/telemetry": ["packages/telemetry/src"],
+      "@realestate-crm/telemetry/*": ["packages/telemetry/src/*"]
     }
   }
 }

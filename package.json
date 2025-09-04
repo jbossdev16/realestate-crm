@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "description": "Real Estate CRM with AI capabilities",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
     "build": "turbo run build --filter=!@realestate-crm/root",
     "dev": "turbo run dev --filter=!@realestate-crm/root",

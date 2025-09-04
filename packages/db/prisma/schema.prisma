@@ -28,6 +28,7 @@ model Agency {
 model User {
   id          String   @id @default(cuid())
   email       String
+  password    String
   firstName   String
   lastName    String
   role        UserRole @default(AGENT)

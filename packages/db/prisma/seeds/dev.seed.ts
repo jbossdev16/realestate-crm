@@ -1,5 +1,24 @@
-import { PrismaClient, UserRole, LeadStatus } from '@prisma/client';
-import { prisma } from '../../src/client';
+import { PrismaClient } from '@prisma/client';
+
+// Define enums locally until Prisma client is generated
+enum UserRole {
+  OWNER = "OWNER",
+  ADMIN = "ADMIN", 
+  AGENT = "AGENT",
+  VIEWER = "VIEWER"
+}
+
+enum LeadStatus {
+  NEW = "NEW",
+  CONTACTED = "CONTACTED",
+  QUALIFIED = "QUALIFIED",
+  VIEWING_BOOKED = "VIEWING_BOOKED",
+  OFFER_MADE = "OFFER_MADE",
+  CLOSED = "CLOSED",
+  LOST = "LOST"
+}
+import { prisma } from '../src/client';
+import * as bcrypt from 'bcryptjs';
 
 async function main() {
   console.log('🌱 Starting seed...');
@@ -17,6 +36,7 @@ async function main() {
   console.log('✅ Created agency:', agency.name);
 
   // Create user
+  const hashedPassword = await bcrypt.hash('password123', 10);
   const user = await prisma.user.upsert({
     where: { 
       email_agencyId: {
@@ -27,6 +47,7 @@ async function main() {
     update: {},
     create: {
       email: 'admin@demo.local',
+      password: hashedPassword,
       firstName: 'John',
       lastName: 'Doe',
       role: UserRole.OWNER,
