@@ -40,11 +40,17 @@ cd ../..
 - 3 Demo leads for testing
 
 ### 🌐 Access Your Services
+
+#### **Web Applications (Browser Access):**
 - **Main CRM Dashboard**: http://localhost:3000
 - **Qdrant Vector Database**: http://localhost:6333/dashboard
 - **MinIO File Storage**: http://localhost:9001 (login: minio/minio123)
+
+#### **Database Services (Client Access Required):**
 - **PostgreSQL Database**: localhost:5432 (postgres/postgres)
-- **Redis Cache**: localhost:6379
+  - **Recommended Tool**: pgAdmin 4 (Windows installer)
+  - **Connection**: Host: localhost, Port: 5432, Database: realcrm, User: postgres, Password: postgres
+- **Redis Cache**: localhost:6379 (use Redis client or command line)
 
 ## 🏗️ Project Structure
 
@@ -168,6 +174,31 @@ npm run db:seed
 - **Password**: postgres
 - **Status**: ✅ Connected and operational
 - **Demo Data**: ✅ 1 agency, 1 user, 3 leads loaded
+
+### Database Management Tools
+
+#### **pgAdmin 4 (Recommended)**
+- **Download**: https://www.pgadmin.org/download/pgadmin-4-windows/
+- **Purpose**: Graphical database management interface
+- **Features**: Browse tables, run queries, manage data, monitor performance
+- **Setup**: Install Windows version, add server with connection details above
+
+#### **Command Line Access**
+```bash
+# Connect to PostgreSQL via Docker
+docker exec -it realcrm-postgres psql -U postgres -d realcrm
+
+# Run a simple query
+docker exec realcrm-postgres psql -U postgres -d realcrm -c "SELECT * FROM agencies;"
+
+# Check database status
+docker exec realcrm-postgres pg_isready -U postgres
+```
+
+#### **Alternative Database Clients**
+- **DBeaver**: Universal database tool
+- **TablePlus**: Modern database client
+- **DataGrip**: JetBrains database IDE
 
 ### Current Database Contents
 ```sql
@@ -493,6 +524,12 @@ docker-compose -f infra/docker/docker-compose.dev.yml up -d --build
 # Test database connection
 docker exec realcrm-postgres psql -U postgres -d realcrm -c "SELECT COUNT(*) FROM agencies;"
 ```
+
+#### Database Access Issues
+- **Problem**: "ERR_EMPTY_RESPONSE" when accessing localhost:5432 in browser
+- **Solution**: PostgreSQL is not a web service - use pgAdmin 4 or command line
+- **Correct Access**: Install pgAdmin 4 or use Docker commands above
+- **Browser Access**: Only use browser for web apps (localhost:3000, localhost:6333, localhost:9001)
 
 ## 📞 Support
 
