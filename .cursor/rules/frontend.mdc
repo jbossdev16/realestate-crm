@@ -1,0 +1,26 @@
+---
+description: These are rules for the frontend
+
+1. **Stack:** Next.js (App Router) + React + **TypeScript strict** + Tailwind + **shadcn/ui**; no extra UI libs.
+2. **Rendering:** **RSC by default**; use client components only for interactivity (forms, DnD, chat, voice).
+3. **Data:** Server `fetch()` in RSC for reads; **TanStack Query** for client-side queries/mutations + cache/invalidate.
+4. **Forms:** **React Hook Form + Zod**; inline errors; preserve input on failure; map 422s to fields.
+5. **Auth/Tenant:** UI reads session/agency, but **server is authority**; never assume permission client-side.
+6. **URL is state:** filters/sorts/pagination in the querystring; back/refresh must preserve view.
+7. **Lists:** **cursor pagination**; no unbounded lists; show skeletons (not spinners).
+8. **Tables/Kanban:** virtualize >100 rows; optimistic updates with rollback on error.
+9. **Search/Filters:** debounce 300–500ms; show active filter chips; remember user prefs.
+10. **AI panels:** retrieve-first; **show citations**; “thinking/retrieving/generating” states; let users edit before send.
+11. **Uploads:** pre-signed S3/R2 flow; progress bars; large files parse **async**; show status.
+12. **Voice UI:** call logs with summary + transcript; legal/recording notice if enabled.
+13. **A11y & i18n:** keyboard-first, ARIA labels, AA contrast; strings externalized; dates/numbers localized.
+14. **Security:** no secrets; only safe `NEXT_PUBLIC_*`; sanitize rich text; never display cross-tenant data.
+15. **Performance:** code-split heavy components; Next/Image; minimize re-renders; avoid `useEffect` for data.
+16. **Design system:** use tokens; compose from **shadcn/ui**; no ad-hoc component clones.
+17. **Errors:** friendly boundaries per route; 401/403 redirect or explain; 429/503 → retry guidance.
+18. **Feature flags:** hide gated UI; add “why disabled” hint for admins; never hard-enable risky features.
+19. **Testing:** RTL for components; Playwright smoke for key flows (leads list/create); mock network with MSW.
+20. **DoD:** typed API client with Zod, a11y pass, skeletons, URL state, tests added, minimal diff, and no new env vars.
+
+alwaysApply: false
+---

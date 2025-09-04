@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@crm/db/*": ["packages/db/src/*"],
+      "@crm/ai/*": ["packages/ai/src/*"],
+      "@crm/types/*": ["packages/types/src/*"],
+      "@crm/ui/*": ["packages/ui/src/*"],
+      "@crm/config/*": ["packages/config/src/*"],
+      "@crm/utils/*": ["packages/utils/src/*"],
+      "@crm/telemetry/*": ["packages/telemetry/src/*"]
+    }
+  }
+}

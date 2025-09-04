@@ -1,0 +1,26 @@
+---
+description: These are rules for the backend
+
+1. **Stack:** NestJS + **TypeScript strict** + Prisma on Postgres; one Prisma client; no `any`.
+2. **Multitenancy:** every table has `agency_id`; **Postgres RLS** on; never cross-tenant.
+3. **Layers:** Controllers thin → Services (logic) → Repositories (Prisma); no Prisma in controllers.
+4. **Contracts:** **Zod DTOs** at every boundary; validate early; reject with 422 on field errors.
+5. **API style:** REST `/v1`; responses `{ data, meta, error? }`; **cursor pagination**; rate limits.
+6. **Security:** env via `@crm/config` (zod-validated); no secrets in code; encrypt PII where feasible.
+7. **AuthZ:** guards + policies; service-level checks too (defense-in-depth).
+8. **Transactions:** use `prisma.$transaction`; no external API calls inside transactions.
+9. **Idempotency:** POSTs that can retry accept **Idempotency-Key**; deterministic webhooks.
+10. **Background work:** BullMQ for long tasks; exponential backoff; DLQ; jobs **idempotent**.
+11. **Webhooks:** verify signatures + timestamps; durable write/queue before 2xx; store raw (short-term).
+12. **Observability:** JSON logs (with `requestId`, `agencyId`), **OpenTelemetry** traces, **Sentry** errors; no PII in logs.
+13. **Performance:** add indexes; avoid N+1; bounded selects; safe Redis caching; p95 reads < 300ms.
+14. **RAG/AI:** tenant-isolated indexes (Qdrant); **retrieve first**, answer only from context; track tokens/costs.
+15. **Voice:** Twilio/Realtime webhooks; low-latency streaming; consent/recording rules; summarize + log outcomes.
+16. **Migrations & seeds:** Prisma migrations only; no edits to old migrations; idempotent seeds for dev/demo.
+17. **Errors:** domain exceptions → mapped HTTP; 429/503 with retry hints; never leak stacks to clients.
+18. **Docs:** Swagger (hide private endpoints); health/readiness endpoints; version `/v1`.
+19. **Testing:** unit (services), integration (DB), E2E (HTTP + guards); mocks for external adapters; tests required in PRs.
+20. **DoD:** agency scoping + RLS respected, zod DTOs, logs/traces, tests green, minimal reversible diff, **no new env vars**.
+
+alwaysApply: false
+---

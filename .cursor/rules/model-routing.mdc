@@ -1,0 +1,26 @@
+---
+description: 
+
+1. **Default = Claude Sonnet** for all coding/planning across files.
+2. **Fallback = GPT-4.1** when Sonnet’s patch compiles but tests fail or logic is off.
+3. **Gemini 1.5 Pro = long-context only** (massive docs/logs); summarize → hand coding back to Sonnet/GPT-4.1.
+4. **Fast models (Haiku / GPT-4.1 Mini)** only for boilerplate drafts; never the final commit.
+5. One model per commit; if another model fixes it, make a new commit referencing the failure.
+6. Always start with a **change plan** → then generate minimal diffs.
+7. After each patch: **typecheck + tests**; if failing, auto-swap to GPT-4.1 with exact errors.
+8. If failure stems from missing global context, run **Gemini summary once**, then return to Sonnet/GPT-4.1.
+9. Never invent env vars/deps; follow `/project.mdc`, `/backend.mdc`, `/frontend.mdc`.
+10. Prefer **small, reversible diffs** with zod DTOs, RLS-safe queries, and tests.
+11. Cite **why this model was chosen** in the PR description.
+12. Do not merge code produced solely by **fast** models; finalize with Sonnet/GPT-4.1.
+13. Keep **cost/latency** sane: Sonnet first; GPT-4.1 only on failure; Gemini only for huge context.
+14. If stuck after two attempts, produce a **diagnostic summary** and propose next steps.
+15. Never bypass guardrails: no secret creation, no deploys; output checklists instead.
+16. Respect **feature flags**; don’t enable risky features without them.
+17. For refactors touching many files: Sonnet plan → GPT-4.1 fix pass only if tests fail.
+18. For precise bug fixes with failing tests: consider **GPT-4.1 first**; minimal targeted patch.
+19. Override syntax (optional): `[[model: sonnet|gpt-4.1|gemini]]`, `[[speed: fast]]` (draft only).
+20. If a rule conflicts with security/data integrity, **choose safety** and state the deviation.
+
+alwaysApply: true
+---

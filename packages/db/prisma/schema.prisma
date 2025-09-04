@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Agency {
+  id          String   @id @default(cuid())
+  name        String
+  domain     String?  @unique
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  // Relations
+  users      User[]
+  leads      Lead[]
+
+  @@map("agencies")
+}
+
+model User {
+  id          String   @id @default(cuid())
+  email       String
+  firstName   String
+  lastName    String
+  role        UserRole @default(AGENT)
+  agencyId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  // Relations
+  agency     Agency   @relation(fields: [agencyId], references: [id])
+  leads      Lead[]   @relation("UserLeads")
+
+  @@unique([email, agencyId])
+  @@index([agencyId])
+  @@map("users")
+}
+
+model Lead {
+  id          String      @id @default(cuid())
+  email       String?
+  phone       String?
+  firstName   String
+  lastName    String
+  status      LeadStatus  @default(NEW)
+  source      String?
+  notes       String?
+  agencyId    String
+  assignedTo  String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  deletedAt   DateTime?
+
+  // Relations
+  agency     Agency      @relation(fields: [agencyId], references: [id])
+  assignedUser User?     @relation("UserLeads", fields: [assignedTo], references: [id])
+
+  @@index([agencyId])
+  @@index([status])
+  @@index([assignedTo])
+  @@map("leads")
+}
+
+enum UserRole {
+  OWNER
+  ADMIN
+  AGENT
+  VIEWER
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUALIFIED
+  VIEWING_BOOKED
+  OFFER_MADE
+  CLOSED
+  LOST
+}

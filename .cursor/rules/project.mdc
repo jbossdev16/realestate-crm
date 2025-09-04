@@ -1,0 +1,11 @@
+---
+description:
+# Cursor Agent Guardrails
+- Auto-apply edits: off by default. Ask before mass edits.
+- Auto-run: allowed commands only → ["pnpm lint","pnpm typecheck","pnpm build","pnpm test","pnpm prisma generate"].
+- Auto-run: forbidden commands → ["prisma migrate","docker","flyctl","vercel","railway","aws","gcloud","stripe","twilio"] unless I explicitly say: [[allow-deploy]].
+- Never create or modify secrets; instead, output a checklist with required ENV names for me to set.
+- For big PRs, prefer Background Agent on a new branch; include test plan and run tests before proposing commit.
+- Always cite which rule you followed when declining a risky action.
+alwaysApply: true
+---

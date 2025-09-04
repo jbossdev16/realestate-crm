@@ -1,0 +1,31 @@
+{
+  "name": "realestate-crm",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Real Estate CRM with AI capabilities",
+  "scripts": {
+    "build": "turbo run build --filter=!@realestate-crm/root",
+    "dev": "turbo run dev --filter=!@realestate-crm/root",
+    "lint": "turbo run lint --filter=!@realestate-crm/root",
+    "typecheck": "turbo run typecheck --filter=!@realestate-crm/root",
+    "clean": "turbo run clean --filter=!@realestate-crm/root",
+    "db:generate": "npm run db:generate --workspace=packages/db",
+    "db:push": "npm run db:push --workspace=packages/db",
+    "db:migrate": "npm run db:migrate --workspace=packages/db",
+    "db:seed": "npm run db:seed --workspace=packages/db",
+    "dx:up": "docker-compose -f infra/docker/docker-compose.dev.yml up -d",
+    "dx:down": "docker-compose -f infra/docker/docker-compose.dev.yml down",
+    "setup:dev": "npm run dx:up && npm run db:generate && npm run db:push && npm run db:seed",
+    "dev:full": "npm run setup:dev && npm run dev"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "turbo": "^1.10.0",
+    "typescript": "^5.0.0"
+  },
+  "packageManager": "npm@10.0.0",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=10.0.0"
+  }
+}
