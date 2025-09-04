@@ -1,0 +1,63 @@
+[33mcommit 09ff7809e945c686e6d72dc28690b4defa1822f2[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: jbossdev16 <jboss.dev16@gmail.com>
+Date:   Thu Sep 4 21:42:46 2025 +0200
+
+    feat: Create web application and API with Docker setup
+    
+    ✨ New Features:
+    - Created Next.js web application with Tailwind CSS
+    - Created NestJS API with Swagger documentation
+    - Added Docker development environment for web app
+    - Implemented health check endpoints
+    
+    🏗️ Infrastructure:
+    - Updated docker-compose.dev.yml to include web application
+    - Created Dockerfile.dev for development web container
+    - Fixed TypeScript configuration issues
+    - Resolved module resolution conflicts
+    
+    🌐 Applications:
+    - Web app running on http://localhost:3000
+    - API ready for development on port 3001
+    - All infrastructure services operational
+    - Database with demo data seeded
+    
+    📝 Documentation:
+    - Updated README with current status and access URLs
+    - Added troubleshooting section
+    - Documented recent changes and solutions
+    - Updated setup instructions for Docker-based development
+    
+    🔧 Technical Details:
+    - Fixed Next.js SWC binary issues on Windows using Docker
+    - Resolved TypeScript moduleResolution conflicts
+    - Created proper workspace package configurations
+    - Added development Dockerfile for containerized development
+    
+    Status: Web application fully operational ✅
+    All services accessible and documented 📚
+
+ README.md                                |   95 [32m+[m[31m-[m
+ apps/api/nest-cli.json                   |    8 [32m+[m
+ apps/api/package.json                    |   38 [32m+[m
+ apps/api/src/app.controller.ts           |   16 [32m+[m
+ apps/api/src/app.module.ts               |   11 [32m+[m
+ apps/api/src/app.service.ts              |    8 [32m+[m
+ apps/api/src/health/health.controller.ts |   16 [32m+[m
+ apps/api/src/health/health.module.ts     |    9 [32m+[m
+ apps/api/src/health/health.service.ts    |   18 [32m+[m
+ apps/api/src/main.ts                     |   29 [32m+[m
+ apps/api/tsconfig.json                   |   23 [32m+[m
+ apps/web/Dockerfile.dev                  |   26 [32m+[m
+ apps/web/next-env.d.ts                   |    5 [32m+[m
+ apps/web/next.config.js                  |   10 [32m+[m
+ apps/web/package-lock.json               | 1798 [32m++++++++++++++++++++++++++++++[m
+ apps/web/package.json                    |   25 [32m+[m
+ apps/web/postcss.config.js               |    6 [32m+[m
+ apps/web/src/app/globals.css             |    3 [32m+[m
+ apps/web/src/app/layout.tsx              |   42 [32m+[m
+ apps/web/src/app/page.tsx                |   57 [32m+[m
+ apps/web/tailwind.config.js              |   13 [32m+[m
+ apps/web/tsconfig.json                   |   31 [32m+[m
+ infra/docker/docker-compose.dev.yml      |   18 [32m+[m
+ 23 files changed, 2288 insertions(+), 17 deletions(-)
