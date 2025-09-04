@@ -7,3 +7,7 @@ dist
 coverage
 .tmp
 pnpm-debug.log
+
+# Turbo cache files
+.turbo/
+*.turbo.log
