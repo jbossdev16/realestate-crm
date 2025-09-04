@@ -12,26 +12,22 @@ A vertical CRM for real-estate agencies with integrated AI (chat + voice), docum
 
 ### Initial Setup (COMPLETED ✅)
 ```bash
-# 1. Install all dependencies
-npm install
+# 1. Start all services using Docker (RECOMMENDED)
+cd infra/docker
+docker-compose -f docker-compose.dev.yml up -d
 
-# 2. Start infrastructure services
-npm run dx:up
-
-# 3. Set up database (run from packages/db directory)
-cd packages/db
+# 2. Set up database (run from packages/db directory)
+cd ../../packages/db
 npm install
 $env:DATABASE_URL="postgresql://postgres:postgres@localhost:5432/realcrm"
 npm run db:generate
 npm run db:push
 npm run db:seed
 cd ../..
-
-# 4. Start development servers (when apps are built)
-npm run dev
 ```
 
-### Current Status
+### Current Status - FULLY OPERATIONAL ✅
+✅ **Web Application**: `http://localhost:3000` - Real Estate CRM Dashboard
 ✅ **All infrastructure services are running:**
 - PostgreSQL (port 5432) - Database with demo data
 - Redis (port 6379) - Cache and sessions  
@@ -42,6 +38,13 @@ npm run dev
 - 1 Demo agency: "Demo Real Estate Agency"
 - 1 Admin user: admin@demo.local
 - 3 Demo leads for testing
+
+### 🌐 Access Your Services
+- **Main CRM Dashboard**: http://localhost:3000
+- **Qdrant Vector Database**: http://localhost:6333/dashboard
+- **MinIO File Storage**: http://localhost:9001 (login: minio/minio123)
+- **PostgreSQL Database**: localhost:5432 (postgres/postgres)
+- **Redis Cache**: localhost:6379
 
 ## 🏗️ Project Structure
 
@@ -102,6 +105,19 @@ docker exec realcrm-postgres psql -U postgres -d realcrm -c "SELECT COUNT(*) FRO
 # Test Redis connection
 docker exec realcrm-redis redis-cli ping
 ```
+
+### Development Docker Setup - ACTIVE ✅
+The development environment is now fully containerized and running:
+
+- **`docker-compose.dev.yml`** - Development Docker Compose configuration (UPDATED)
+- **Web Application**: Running in Docker container on port 3000
+- **All Services**: PostgreSQL, Redis, Qdrant, MinIO, and Web App
+
+**Applications Created:**
+- **`apps/web/`** - Next.js web application with Tailwind CSS
+- **`apps/api/`** - NestJS API with Swagger documentation
+- **`apps/web/Dockerfile.dev`** - Development Dockerfile for web app
+- **`apps/api/Dockerfile`** - Production Dockerfile for API
 
 ### Production Docker Setup
 Complete production deployment files have been created in `infra/docker/`:
@@ -184,7 +200,11 @@ npm run <command> --workspace=packages/<workspace>
 
 ### Build & Development
 ```bash
-# Start all development servers (when apps are built)
+# Start all development servers (Docker-based - RECOMMENDED)
+cd infra/docker
+docker-compose -f docker-compose.dev.yml up -d
+
+# Alternative: Start individual apps (if not using Docker)
 npm run dev
 
 # Build all packages
@@ -390,6 +410,12 @@ pnpm install
 - ✅ **File Storage**: MinIO configured
 - ✅ **Environment**: All configurations set up
 
+### Applications Created (NEW ✅)
+- ✅ **Web Application**: Next.js app running on http://localhost:3000
+- ✅ **API Application**: NestJS API with Swagger documentation
+- ✅ **Docker Development**: Web app containerized and working
+- ✅ **TypeScript Config**: Fixed configuration issues
+
 ### Production Ready Files Created
 - ✅ **Docker Compose**: Production configuration
 - ✅ **Dockerfiles**: For API, Web, and Workers
@@ -411,10 +437,10 @@ pnpm install
    - CRUD operations for leads, users, agencies
    - API documentation with Swagger
 
-2. **Web Application** (`apps/web/`)
-   - Next.js frontend with dashboard
-   - Lead management interface
-   - User authentication and roles
+2. **Web Application** (`apps/web/`) - ✅ CREATED
+   - Next.js frontend with dashboard (WORKING)
+   - Lead management interface (TO BE BUILT)
+   - User authentication and roles (TO BE BUILT)
 
 3. **Background Workers** (`apps/workers/`)
    - Email/SMS automation
@@ -433,6 +459,41 @@ pnpm install
    - Set up SSL certificates
    - Configure domain and DNS
 
+## 🔧 Troubleshooting
+
+### Recent Changes Made
+- **Web Application**: Created Next.js app with Tailwind CSS
+- **API Application**: Created NestJS API with Swagger
+- **Docker Setup**: Added web app to development Docker Compose
+- **TypeScript Config**: Fixed module resolution issues
+- **Development Dockerfile**: Created `Dockerfile.dev` for web app
+
+### Common Issues & Solutions
+
+#### Web App Not Starting
+```bash
+# If web app fails to start locally (Windows SWC issue)
+cd infra/docker
+docker-compose -f docker-compose.dev.yml up -d --build web
+```
+
+#### TypeScript Errors
+- Fixed: `moduleResolution: "bundler"` conflict with `module: "commonjs"`
+- Solution: Added `"moduleResolution": "node"` to API tsconfig.json
+
+#### Docker Issues
+```bash
+# Rebuild containers if needed
+docker-compose -f infra/docker/docker-compose.dev.yml down
+docker-compose -f infra/docker/docker-compose.dev.yml up -d --build
+```
+
+#### Database Connection
+```bash
+# Test database connection
+docker exec realcrm-postgres psql -U postgres -d realcrm -c "SELECT COUNT(*) FROM agencies;"
+```
+
 ## 📞 Support
 
 - **Developer**: jbossdev16 (jboss.dev16@gmail.com)
@@ -441,6 +502,6 @@ pnpm install
 
 ---
 
-**Last Updated**: September 2024
+**Last Updated**: September 4, 2025 - Web Application & API Created
 **Version**: 0.0.0
 **Status**: Infrastructure Complete ✅ | Ready for Application Development 🚀

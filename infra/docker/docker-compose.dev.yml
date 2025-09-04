@@ -66,6 +66,24 @@ services:
       timeout: 10s
       retries: 3
 
+  web:
+    build:
+      context: ../../apps/web
+      dockerfile: Dockerfile.dev
+    container_name: realcrm-web-dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:3001/api/v1
+    depends_on:
+      - postgres
+      - redis
+      - qdrant
+      - minio
+    networks:
+      - default
+
 volumes:
   postgres_data:
   redis_data:
