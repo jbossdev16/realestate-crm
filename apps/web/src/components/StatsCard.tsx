@@ -5,7 +5,7 @@ interface StatsCardProps {
   title: string;
   value: string | number;
   icon: LucideIcon;
-  color: 'blue' | 'green' | 'purple' | 'yellow' | 'red';
+  color: 'blue' | 'green' | 'purple' | 'yellow' | 'red' | 'indigo' | 'pink' | 'orange';
   change?: string;
   changeType?: 'positive' | 'negative' | 'neutral';
 }
@@ -24,6 +24,9 @@ export default function StatsCard({
     purple: 'bg-purple-500',
     yellow: 'bg-yellow-500',
     red: 'bg-red-500',
+    indigo: 'bg-indigo-500',
+    pink: 'bg-pink-500',
+    orange: 'bg-orange-500',
   };
 
   const changeColorClasses = {
@@ -33,11 +36,11 @@ export default function StatsCard({
   };
 
   return (
-    <div className="bg-white overflow-hidden shadow rounded-lg">
+    <div className="bg-white overflow-hidden shadow-lg rounded-lg border border-gray-200 hover:shadow-xl transition-shadow duration-200">
       <div className="p-5">
         <div className="flex items-center">
           <div className="flex-shrink-0">
-            <div className={cn('p-3 rounded-md', colorClasses[color])}>
+            <div className={cn('p-3 rounded-lg shadow-sm', colorClasses[color])}>
               <Icon className="h-6 w-6 text-white" />
             </div>
           </div>
@@ -47,7 +50,7 @@ export default function StatsCard({
                 {title}
               </dt>
               <dd className="flex items-baseline">
-                <div className="text-2xl font-semibold text-gray-900">
+                <div className="text-2xl font-bold text-gray-900">
                   {value}
                 </div>
                 {change && (

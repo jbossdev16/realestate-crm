@@ -1,4 +1,52 @@
-# Docker Production Setup
+# Docker Setup for Real Estate CRM
+
+This directory contains all the necessary files to run your Real Estate CRM in both development and production environments using Docker.
+
+## 🚀 Quick Start - Development
+
+### Prerequisites
+- Docker Desktop installed and running
+- Docker Compose installed
+
+### Start Development Environment
+
+**For Windows:**
+```bash
+# Navigate to docker directory
+cd infra/docker
+
+# Run setup (first time only)
+setup-dev.bat
+
+# Start development environment
+start-dev.bat
+```
+
+**For Linux/macOS:**
+```bash
+# Navigate to docker directory
+cd infra/docker
+
+# Make scripts executable
+chmod +x setup-dev.sh start-dev.sh
+
+# Run setup (first time only)
+./setup-dev.sh
+
+# Start development environment
+./start-dev.sh
+```
+
+### Access Your Enhanced Dashboard
+- **Web App**: http://localhost:3000
+- **PostgreSQL**: localhost:5432
+- **Redis**: localhost:6379
+- **Qdrant**: http://localhost:6333
+- **MinIO Console**: http://localhost:9001
+
+---
+
+## 🏭 Production Setup
 
 This directory contains all the necessary files to deploy your Real Estate CRM to a production server using Docker.
 

@@ -76,6 +76,11 @@ services:
     environment:
       NODE_ENV: development
       NEXT_PUBLIC_API_URL: http://localhost:3001/api/v1
+      WATCHPACK_POLLING: true
+    volumes:
+      - ../../apps/web:/app
+      - /app/node_modules
+      - /app/.next
     depends_on:
       - postgres
       - redis
@@ -83,6 +88,7 @@ services:
       - minio
     networks:
       - default
+    restart: unless-stopped
 
 volumes:
   postgres_data:
